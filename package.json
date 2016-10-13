@@ -1,0 +1,32 @@
+{
+  "name": "ws-validate-person-nodejs",
+  "version": "0.0.1",
+  "description": "This is a simple WebService for ceair write by nodejs ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynu/ws-validate-person-nodejs.git"
+  },
+  "keywords": [
+    "node",
+    "soap",
+    "soap-server",
+    "ceair"
+  ],
+  "author": "liudonghua123",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ynu/ws-validate-person-nodejs/issues"
+  },
+  "homepage": "https://github.com/ynu/ws-validate-person-nodejs#readme",
+  "dependencies": {
+    "asyncawait": "^1.0.6",
+    "promise": "^7.1.1",
+    "soap": "^0.17.0",
+    "soap-server": "github:liudonghua123/node-soap-server",
+    "xml2js": "^0.4.17"
+  }
+}

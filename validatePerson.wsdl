@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://server.soap.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://server.soap.com/" name="validatePerson">
+    <types>
+        <xsd:schema version="1.0" targetNamespace="http://server.soap.com/" />
+    </types>
+    <message name="validatePerson">
+        <part name="person" type="xsd:string" />
+    </message>
+    <message name="validatePersonResponse">
+        <part name="validatePersonResult" type="xsd:string" />
+    </message>
+    <portType name="validatePerson_PortType">
+        <operation name="validatePerson">
+            <input message="tns:validatePerson" />
+            <output message="tns:validatePersonResponse" />
+        </operation>
+    </portType>
+    <binding name="validatePerson_Binding" type="tns:validatePerson_PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="validatePerson">
+            <soap:operation soapAction="validatePerson" />
+            <input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:examples:validatePerson" use="encoded" />
+            </input>
+            <output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:examples:validatePerson" use="encoded" />
+            </output>
+        </operation>
+    </binding>
+    <service name="validatePerson">
+        <port name="validatePerson_Port" binding="tns:validatePerson_Binding">
+            <soap:address location="http://localhost:3000/validatePerson" />
+        </port>
+    </service>
+</definitions>
