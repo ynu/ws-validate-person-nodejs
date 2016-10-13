@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/ynu/ws-validate-person-nodejs#readme",
   "dependencies": {
-    "asyncawait": "^1.0.6",
     "promise": "^7.1.1",
     "soap": "^0.17.0",
     "soap-server": "github:liudonghua123/node-soap-server",
