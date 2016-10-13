@@ -21,7 +21,6 @@ validatePersonsService.prototype.validatePerson = function(person){
             }
             var xml_object = result;
             console.log(util.inspect(result, false, null));
-            console.log("json_object: %s", JSON.stringify(result));
 
             result_object = {RTN_PERSON: {ERR_ID: '1', ERR_MSG: '', RTN_PERSON_INFO_LIST: []}};
             RTN_PERSON_INFO = result_object.RTN_PERSON.RTN_PERSON_INFO_LIST;
@@ -29,7 +28,8 @@ validatePersonsService.prototype.validatePerson = function(person){
                 RTN_PERSON_INFO.push({RTN_PERSON_INFO: {SORT_ID: person_info.SORT_ID[0], PERSON_TYPE: "1"}})
             });
 
-            resolve(result_object);
+            var xml = builder.buildObject(result_object);
+            resolve(xml);
         });
     });
 
