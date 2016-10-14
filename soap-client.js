@@ -1,9 +1,10 @@
 var soap = require('soap');
 
 // var url = 'http://web-service-ceair.ynu.edu.cn/ws/validate-person?wsdl';
+var url = 'http://web-service-ceair.ynu.edu.cn/validatePerson?wsdl';
+// var url = 'webservice.ecust.edu.cn/jpyd/services/B2gAuthenticationService?wsdl';
 // var url = 'http://localhost:3000/validatePerson?wsdl';
-var url = 'validatePerson.wsdl';
-// var url = 'B2gAuthenticationService.wsdl.xml';
+// var url = 'validatePerson.wsdl';
 
 var args = {
     person: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
@@ -29,19 +30,9 @@ var args = {
     "</PERSON>"
 };
 
-var wsdlOptions = {
-    // overrideRootElement: {
-    //     namespace: "ns",
-    //     xmlnsAttributes: [{
-    //         name: "xmlns:ns",
-    //         value: "http://web-service-ceair.ynu.edu.cn/validate-person"
-    //     }]
-    // }
-};
-
-soap.createClient(url, wsdlOptions, function(err, client) {
+soap.createClient(url, function(err, client) {
     console.info(client.describe());
-    client.validatePerson(args, function(err, result) {
+    client.validatePerson.validatePerson_Port.validatePerson(args, function(err, result) {
         console.log('%j\n', err);
         console.log('%j\n', result);
         console.log('%j\n', client.lastRequest);
