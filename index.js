@@ -22,13 +22,21 @@ validatePersonsService.prototype.validatePerson = function(person){
             var xml_object = result;
             console.log(util.inspect(result, false, null));
 
-            result_object = {RTN_PERSON: {ERR_ID: '1', ERR_MSG: '', RTN_PERSON_INFO_LIST: []}};
-            RTN_PERSON_INFO = result_object.RTN_PERSON.RTN_PERSON_INFO_LIST;
-            xml_object.PERSON.PERSON_INFO_LIST[0].PERSON_INFO.forEach(function(person_info) {
-                RTN_PERSON_INFO.push({RTN_PERSON_INFO: {SORT_ID: person_info.SORT_ID[0], PERSON_TYPE: "1"}})
-            });
+            var rtn_person = {
+                RTN_PERSON: {
+                    ERR_ID: '1',
+                    ERR_MSG: '',
+                    RTN_PERSON_INFO_LIST: {RTN_PERSON_INFO:[]}
+                }
+            }
+            person_infos = result.PERSON.PERSON_INFO_LIST[0].PERSON_INFO;
+            rtn_person_infos = rtn_person.RTN_PERSON.RTN_PERSON_INFO_LIST.RTN_PERSON_INFO;
+            for(var i = 0; i < person_infos.length; i++) {
+                person_info = person_infos[i];
+                rtn_person_infos.push({SORT_ID: person_info.SORT_ID,PERSON_TYPE: '1'});
+            }
 
-            var xml = builder.buildObject(result_object);
+            var xml = builder.buildObject(rtn_person);
             resolve(xml);
         });
     });
@@ -37,5 +45,9 @@ validatePersonsService.prototype.validatePerson = function(person){
 
 var soapServer = new soap.SoapServer();
 var soapService = soapServer.addService('validatePerson', new validatePersonsService());
+
+var validatePersonOperation = soapService.getOperation('validatePerson');
+validatePersonOperation.setOutputType('string');
+validatePersonOperation.setInputType('person', {type: 'string'});
 
 soapServer.listen(3000, '0.0.0.0');
