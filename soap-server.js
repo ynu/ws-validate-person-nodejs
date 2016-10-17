@@ -1,5 +1,8 @@
 var http=require('http');
 var soap = require('soap');
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
+var builder = new xml2js.Builder();
 
 var myService = {
     validatePerson: {
@@ -13,13 +16,14 @@ var myService = {
                         RTN_PERSON_INFO_LIST: {RTN_PERSON_INFO:[]}
                     }
                 }
-                person_infos = person.person.PERSON.PERSON_INFO_LIST.PERSON_INFO;
+                person_infos = person.person.$value.PERSON.PERSON_INFO_LIST.PERSON_INFO;
                 rtn_person_infos = rtn_person.RTN_PERSON.RTN_PERSON_INFO_LIST.RTN_PERSON_INFO;
                 for(var i = 0; i < person_infos.length; i++) {
                     person_info = person_infos[i];
                     rtn_person_infos.push({SORT_ID: person_info.SORT_ID,PERSON_TYPE: '1'});
                 }
-                return rtn_person;
+                var rtn_person_string = "<![CDATA[" + builder.buildObject(rtn_person) + "]]>";
+                return {validatePersonResult: rtn_person_string};
             }
         }
     }
