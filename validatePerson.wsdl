@@ -27,9 +27,9 @@
             </output>
         </operation>
     </binding>
-    <service name="validatePerson">
+    <service name="validatePersonService">
         <port name="validatePerson_Port" binding="tns:validatePerson_Binding">
-            <soap:address location="http://localhost:3000/validatePerson" />
+            <soap:address location="http://localhost:3000/validate-person" />
         </port>
     </service>
 </definitions>
